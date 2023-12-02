@@ -21,7 +21,7 @@ public class MainManager : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -57,7 +57,7 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene("Scenes/menu");
             }
         }
     }
@@ -72,5 +72,13 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        
+        //
+        if (GameController.Instance == null)
+        {
+            return;
+        }
+        GameController.Instance.AddScore(m_Points);
+        GameController.Instance.SaveRanking();
     }
 }
